@@ -2,7 +2,7 @@ import UIKit
 import UserNotifications
 import CocoaMQTT
 
-class EmergencyViewController: UIViewController {
+class EmergencyViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     @IBOutlet weak var toggleSwitch: UISwitch!
     @IBOutlet weak var emergency_image: UIImageView!
@@ -13,7 +13,6 @@ class EmergencyViewController: UIViewController {
         super.viewDidLoad()
         emergency_image.image = UIImage(named: "warning.png")
         self.toggleSwitch.isOn = false
-        
         let clientID = "iotapp"
         mqtt = CocoaMQTT(clientID: clientID, host: "test.mosquitto.org", port: 1883)
         
@@ -24,17 +23,21 @@ class EmergencyViewController: UIViewController {
                 mqtt.subscribe("jim/ntub/emergency_button")
             }
         }
+
         mqtt.didReceiveMessage = { mqtt, message, id in
             if let data = message.string {
+                print("Received message: \(data)")
                 DispatchQueue.main.async {
-                    if data == "on" {
+                    if data.lowercased() == "on" {
                         self.sendNotification()
+                        print("-----------")
                     }
                 }
             }
         }
         
         mqtt.connect()
+        
         
     }
     
@@ -82,5 +85,4 @@ class EmergencyViewController: UIViewController {
             }
         }
     }
-    
 }

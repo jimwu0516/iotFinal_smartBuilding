@@ -179,7 +179,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.033778809010000001" green="0.519064784" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.102768369" green="0.56648659710000004" blue="0.48972719910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.102768369" green="0.56648659710000004" blue="0.48972719910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.102768369" green="0.56648659710000004" blue="0.48972719910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <tabBarAppearance key="standardAppearance"/>
                         <tabBarAppearance key="scrollEdgeAppearance" backgroundEffect="systemMaterialDark"/>
                     </tabBar>
