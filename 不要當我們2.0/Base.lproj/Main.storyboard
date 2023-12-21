@@ -83,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="whB-bp-zA4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1512" y="476"/>
+            <point key="canvasLocation" x="472" y="1887"/>
         </scene>
         <!--Bus View Controller-->
         <scene sceneID="TEY-sS-ipY">
@@ -113,6 +113,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="loading.." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ju-M2-gg5">
+                                <rect key="frame" x="211" y="678" width="138" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="宏國德霖科大" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abx-F0-37C">
                                 <rect key="frame" x="220" y="642" width="120" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -127,10 +134,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="loading.." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ju-M2-gg5">
-                                <rect key="frame" x="211" y="678" width="138" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="262 捷運善導寺站" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQJ-Vg-xtC">
+                                <rect key="frame" x="96" y="103" width="199" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -146,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DmV-uL-Mzw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2409.2307692307691" y="475.59241706161134"/>
+            <point key="canvasLocation" x="1162" y="1887"/>
         </scene>
         <!--Emergency-->
         <scene sceneID="WRa-Oz-qZp">
@@ -200,7 +207,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJg-ic-FYo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2569" y="1157"/>
+            <point key="canvasLocation" x="798" y="1157"/>
         </scene>
         <!--Transportation View Controller-->
         <scene sceneID="Xcc-ar-BQa">
@@ -226,10 +233,11 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fP-iD-Lb9">
                                 <rect key="frame" x="41" y="186" width="309" height="209"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.102768369" green="0.56648659710000004" blue="0.48972719910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="🚲">
+                                <buttonConfiguration key="configuration" style="tinted" title="🚴">
                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="200"/>
+                                    <color key="baseBackgroundColor" red="0.102768369" green="0.56648659710000004" blue="0.48972719910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <segue destination="GVs-OW-QDg" kind="show" id="HWY-Bx-b6k"/>
@@ -238,10 +246,11 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZ9-By-6cE">
                                 <rect key="frame" x="41" y="444" width="309" height="209"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.102768369" green="0.56648659710000004" blue="0.48972719910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="🚍">
+                                <buttonConfiguration key="configuration" style="tinted" title="🚌">
                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="200"/>
+                                    <color key="baseBackgroundColor" red="0.27258664370000002" green="0.39345699550000002" blue="0.3710157275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <segue destination="Ffa-Ka-ijQ" kind="show" id="kvK-lc-ylU"/>
@@ -255,7 +264,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NRh-MA-mOm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800" y="1157"/>
+            <point key="canvasLocation" x="-232" y="1887"/>
         </scene>
         <!--Enter View Controller-->
         <scene sceneID="F5C-IE-FPD">
@@ -314,7 +323,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjO-ee-X2j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-705" y="2145"/>
+            <point key="canvasLocation" x="-1197" y="1887"/>
         </scene>
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
@@ -631,7 +640,7 @@ exit</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qHv-Dl-NRg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4086.1538461538462" y="1156.6350710900474"/>
+            <point key="canvasLocation" x="2218" y="1157"/>
         </scene>
         <!--Monitor-->
         <scene sceneID="ZNC-5z-ura">
@@ -723,7 +732,7 @@ exit</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="doX-kU-uFw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3260" y="1139.5734597156397"/>
+            <point key="canvasLocation" x="1468" y="1157"/>
         </scene>
         <!--Input View Controller-->
         <scene sceneID="lBP-OD-f64">
@@ -780,7 +789,7 @@ exit</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PpF-Vh-1vn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4137" y="505"/>
+            <point key="canvasLocation" x="2217" y="1887"/>
         </scene>
         <!--Transportation-->
         <scene sceneID="HlE-tN-ZB5">
@@ -800,7 +809,7 @@ exit</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZOV-0L-jtR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="121.53846153846153" y="1156.6350710900474"/>
+            <point key="canvasLocation" x="95" y="1157"/>
         </scene>
     </scenes>
     <resources>

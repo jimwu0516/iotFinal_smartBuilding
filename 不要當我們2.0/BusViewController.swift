@@ -23,7 +23,7 @@ class BusViewController: UIViewController {
     
     func setupBarChart() {
         barChartView = BarChartView()
-        barChartView.frame = CGRect(x: 16, y: 100, width: view.frame.size.width - 32, height: 550)
+        barChartView.frame = CGRect(x: 16, y: 130, width: view.frame.size.width - 32, height: 520)
         view.addSubview(barChartView)
     }
     

@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import CocoaMQTT
 
 class MessageViewController: UIViewController {
-
+    
+    let mqttClient = CocoaMQTT(clientID: "iOS Device", host: "mqtt.eclipse.org", port: 1883)
+    
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    var mqtt: CocoaMQTT!
     
     var messages: [String] = ["老者風華展新顏","師者榜樣指前行","不忘初心勇向前","要活真實心自然","當世風雲變莫測","我心深處夢翩翩","們心相伴願成真","二度奮鬥志昂揚","點燃星火激希望", "零散辛勞換豐收"]
     
@@ -23,6 +27,10 @@ class MessageViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
+        
+        let clientID = "iotapp"
+        mqtt = CocoaMQTT(clientID: clientID, host: "test.mosquitto.org", port: 1883)
+        mqtt.connect()
     }
     
     
@@ -35,10 +43,13 @@ class MessageViewController: UIViewController {
         messages.insert(message, at: 0)
         tableView.reloadData()
         sendLineNotify(message: message)
+        self.publishMessageToTopic(message: message, topic: "jim/ntub/announce")
         textField.text = ""
         view.endEditing(true)
         
     }
+    
+    
     func showEmptyTextFieldAlert() {
         let alert = UIAlertController(title: "🤬🤬🤬", message: "Enter sth.", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -65,6 +76,11 @@ class MessageViewController: UIViewController {
         }
         
         task.resume()
+    }
+    
+    func publishMessageToTopic(message: String, topic: String) {
+        let message = CocoaMQTTMessage(topic: topic, string: message)
+        mqtt.publish(message)
     }
     
     @objc func hideKeyboard() {
@@ -95,3 +111,4 @@ extension MessageViewController:UITableViewDataSource, UITableViewDelegate{
         return false
     }
 }
+
