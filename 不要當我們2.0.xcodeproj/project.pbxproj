@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5878EB7DB64F5B57D4C5161E /* Pods_iotproject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C5C664A412049616AE0BB0 /* Pods_iotproject.framework */; };
+		720A6E8D2B3428E50043BE3C /* transportationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A6E8C2B3428E50043BE3C /* transportationViewController.swift */; };
+		720A6E8F2B34302A0043BE3C /* BusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A6E8E2B34302A0043BE3C /* BusViewController.swift */; };
 		725757B62B2470A000EC7D3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725757B52B2470A000EC7D3F /* AppDelegate.swift */; };
 		725757B82B2470A000EC7D3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725757B72B2470A000EC7D3F /* SceneDelegate.swift */; };
 		725757BA2B2470A000EC7D3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725757B92B2470A000EC7D3F /* ViewController.swift */; };
@@ -24,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		00C5C664A412049616AE0BB0 /* Pods_iotproject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iotproject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		720A6E8C2B3428E50043BE3C /* transportationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transportationViewController.swift; sourceTree = "<group>"; };
+		720A6E8E2B34302A0043BE3C /* BusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusViewController.swift; sourceTree = "<group>"; };
 		725757B22B2470A000EC7D3F /* 不要當我們2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "不要當我們2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		725757B52B2470A000EC7D3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		725757B72B2470A000EC7D3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +83,7 @@
 				725757B72B2470A000EC7D3F /* SceneDelegate.swift */,
 				725757B92B2470A000EC7D3F /* ViewController.swift */,
 				727038E02B24E4C300C0C625 /* BikeViewController.swift */,
+				720A6E8E2B34302A0043BE3C /* BusViewController.swift */,
 				7260E7A42B2A970900710A53 /* EmergencyViewController.swift */,
 				7260E7A62B2B0C6900710A53 /* MonitorViewController.swift */,
 				7260E7A82B2CBB7000710A53 /* InputViewController.swift */,
@@ -86,6 +91,7 @@
 				72C0B1582B2A26D30043261A /* EnterViewController.swift */,
 				725757BE2B2470A100EC7D3F /* Assets.xcassets */,
 				725757BB2B2470A000EC7D3F /* Main.storyboard */,
+				720A6E8C2B3428E50043BE3C /* transportationViewController.swift */,
 				725757C02B2470A100EC7D3F /* LaunchScreen.storyboard */,
 				725757C32B2470A100EC7D3F /* Info.plist */,
 			);
@@ -224,12 +230,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				720A6E8D2B3428E50043BE3C /* transportationViewController.swift in Sources */,
 				7260E7A92B2CBB7000710A53 /* InputViewController.swift in Sources */,
 				725757BA2B2470A000EC7D3F /* ViewController.swift in Sources */,
 				7260E7A52B2A970900710A53 /* EmergencyViewController.swift in Sources */,
 				727038E12B24E4C300C0C625 /* BikeViewController.swift in Sources */,
 				725757B62B2470A000EC7D3F /* AppDelegate.swift in Sources */,
 				725757B82B2470A000EC7D3F /* SceneDelegate.swift in Sources */,
+				720A6E8F2B34302A0043BE3C /* BusViewController.swift in Sources */,
 				7260E7A72B2B0C6900710A53 /* MonitorViewController.swift in Sources */,
 				72C0B1572B2A0F060043261A /* MessageViewController.swift in Sources */,
 				72C0B1592B2A26D30043261A /* EnterViewController.swift in Sources */,
