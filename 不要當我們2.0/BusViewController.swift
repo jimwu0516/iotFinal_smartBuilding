@@ -12,6 +12,7 @@ class BusViewController: UIViewController {
     
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
+    var accessToken: String?
     
     var barChartView: BarChartView!
     
@@ -27,14 +28,65 @@ class BusViewController: UIViewController {
         view.addSubview(barChartView)
     }
     
+    func fetchAccessToken(completion: @escaping (Result<String, Error>) -> Void) {
+        let url = URL(string: "https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "content-type")
+        
+        let clientId = "11046084-7f421a9b-4f09-47eb"
+        let clientSecret = "23bab60a-5e3a-4e0a-992a-bfb5d436fff0"
+        let data = "grant_type=client_credentials&client_id=\(clientId)&client_secret=\(clientSecret)".data(using: .utf8)
+        request.httpBody = data
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                let noDataError = NSError(domain: "com.example", code: 1, userInfo: [NSLocalizedDescriptionKey: "No data received"])
+                completion(.failure(noDataError))
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                if let accessToken = json?["access_token"] as? String {
+                    completion(.success(accessToken))
+                } else {
+                    let parsingError = NSError(domain: "com.example", code: 2, userInfo: [NSLocalizedDescriptionKey: "Failed to parse access_token"])
+                    completion(.failure(parsingError))
+                }
+            } catch {
+                completion(.failure(error))
+            }
+        }
+        
+        task.resume()
+    }
     
     func fetchData() {
+        guard let accessToken = self.accessToken else {
+            fetchAccessToken { result in
+                switch result {
+                case .success(let token):
+                    self.accessToken = token
+                    self.fetchData()
+                    print("My token is------------------- \(token)")
+                case .failure(let error):
+                    print("Error fetching access token: \(error.localizedDescription)")
+                }
+            }
+            return
+        }
+        
         guard let url = URL(string: "https://tdx.transportdata.tw/api/basic/v2/Bus/EstimatedTimeOfArrival/City/Taipei/262?%24top=100&%24format=JSON") else {
             return
         }
         
         var request = URLRequest(url: url)
-        let accessToken = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJER2lKNFE5bFg4WldFajlNNEE2amFVNm9JOGJVQ3RYWGV6OFdZVzh3ZkhrIn0.eyJleHAiOjE3MDMyMzU4MTUsImlhdCI6MTcwMzE0OTQxNSwianRpIjoiZjg5NjY3NmUtMDM0Mi00YzgwLWEwMzktODFlNWE4ZTI2ZDUyIiwiaXNzIjoiaHR0cHM6Ly90ZHgudHJhbnNwb3J0ZGF0YS50dy9hdXRoL3JlYWxtcy9URFhDb25uZWN0Iiwic3ViIjoiNzU3NGZkOGEtNDI2ZC00ZTZmLWFjZGQtYWY1Mzc2MjA2MDNiIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiMTEwNDYwODQtN2Y0MjFhOWItNGYwOS00N2ViIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJzdGF0aXN0aWMiLCJwcmVtaXVtIiwicGFya2luZ0ZlZSIsIm1hYXMiLCJhZHZhbmNlZCIsInZhbGlkYXRvciIsImhpc3RvcmljYWwiLCJiYXNpYyJdfSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwidXNlciI6Ijg2MDljNDY4In0.bQHNRoXoHkjhO6VjrHtzZlYDI0G66vWNk7bGRa65DPZ7G_QIsYjpEXcNcwE7PLUa3LpwiSFcx1QbhnP3oB5xV6qQ31_hWoXBEkW6Fvj1waLT0Nx1rNd3JvAIOATBD2aiGNcRaqHahSwo5ZcgWoUhK5PIeDZ4uCSKYW3nfZpoetp7FnjUZW2SxMGnQC3UiOdt5uXV6Z6d13Vle1hjDDcVWStoVK3YzwgQEYTz15B7BA3gl_0fmV3QgNO8tUoDHzI2Z1uOEXdy-Vt72aSRvEaZ4Q19GCT4TnVSKEGNYG1LTU8jtEeBBRtOoiF71JXA7flTf9IXnQdphNUcppdZi1daeQ"
         
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         
