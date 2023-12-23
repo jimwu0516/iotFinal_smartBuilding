@@ -9,7 +9,6 @@ import UIKit
 
 class EnterViewController: UIViewController {
     
-    
     @IBOutlet weak var imageView: UIButton!
     
     override func viewDidLoad() {

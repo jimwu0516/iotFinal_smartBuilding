@@ -78,7 +78,7 @@ class BikeViewController: UIViewController {
             PieChartDataEntry(value: Double(bempValue))
         ])
         
-        dataSet.sliceSpace = 3.0  // 調整這個值以控制間隔大小
+        dataSet.sliceSpace = 3.0
         dataSet.colors = [NSUIColor.green, NSUIColor.red]
         dataSet.drawValuesEnabled = false
         

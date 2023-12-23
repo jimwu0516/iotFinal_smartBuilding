@@ -73,18 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 
 
-/*
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // 在應用程序前台收到通知時的處理邏輯
-        completionHandler([.alert, .sound, .badge])
-    }
-    
-    
-    // 其他通知處理方法...
-}
- 
- */
 
 
 

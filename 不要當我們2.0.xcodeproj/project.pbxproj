@@ -82,6 +82,7 @@
 				725757B52B2470A000EC7D3F /* AppDelegate.swift */,
 				725757B72B2470A000EC7D3F /* SceneDelegate.swift */,
 				725757B92B2470A000EC7D3F /* ViewController.swift */,
+				720A6E8C2B3428E50043BE3C /* transportationViewController.swift */,
 				727038E02B24E4C300C0C625 /* BikeViewController.swift */,
 				720A6E8E2B34302A0043BE3C /* BusViewController.swift */,
 				7260E7A42B2A970900710A53 /* EmergencyViewController.swift */,
@@ -91,7 +92,6 @@
 				72C0B1582B2A26D30043261A /* EnterViewController.swift */,
 				725757BE2B2470A100EC7D3F /* Assets.xcassets */,
 				725757BB2B2470A000EC7D3F /* Main.storyboard */,
-				720A6E8C2B3428E50043BE3C /* transportationViewController.swift */,
 				725757C02B2470A100EC7D3F /* LaunchScreen.storyboard */,
 				725757C32B2470A100EC7D3F /* Info.plist */,
 			);

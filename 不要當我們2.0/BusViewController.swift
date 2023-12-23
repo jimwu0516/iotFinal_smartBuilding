@@ -13,7 +13,6 @@ class BusViewController: UIViewController {
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
     var accessToken: String?
-    
     var barChartView: BarChartView!
     
     override func viewDidLoad() {
