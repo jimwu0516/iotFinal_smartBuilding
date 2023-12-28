@@ -1,0 +1,1360 @@
+[
+    {
+        "id": "f250910c1511069a",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b0502f801e988533",
+        "type": "mqtt out",
+        "z": "f250910c1511069a",
+        "name": "",
+        "topic": "jim/ntub/emergency_button",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b1b4374953f55c17",
+        "x": 920,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "c7ba6ae6d5afa6fa",
+        "type": "ui_button",
+        "z": "f250910c1511069a",
+        "name": "",
+        "group": "8dfaea4c2bd67054",
+        "order": 14,
+        "width": 3,
+        "height": 3,
+        "passthru": false,
+        "label": "emergency_mode",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "",
+        "payload": "on",
+        "payloadType": "str",
+        "topic": "action",
+        "topicType": "msg",
+        "x": 130,
+        "y": 40,
+        "wires": [
+            [
+                "b0502f801e988533"
+            ]
+        ]
+    },
+    {
+        "id": "f2868e48596c30fe",
+        "type": "mqtt in",
+        "z": "f250910c1511069a",
+        "name": "",
+        "topic": "jim/ntub/tem",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b1b4374953f55c17",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "8524de11d1652495"
+            ]
+        ]
+    },
+    {
+        "id": "3680ad0006283382",
+        "type": "http request",
+        "z": "f250910c1511069a",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 310,
+        "y": 300,
+        "wires": [
+            [
+                "84611e791a3c0f89",
+                "81eb917727dfb9f6"
+            ]
+        ]
+    },
+    {
+        "id": "84611e791a3c0f89",
+        "type": "function",
+        "z": "f250910c1511069a",
+        "name": "function 1",
+        "func": "// 在 Function 節點中的 JavaScript 代碼\n\n// 取得前一節點的輸出資料\nvar data = msg.payload;\n\n// 要找的 sno\nvar targetSno = \"500106044\";\n\n// 在資料中找到對應的 sno\nvar targetData = null;\nfor (var i = 0; i < data.length; i++) {\n    if (data[i].sno === targetSno) {\n        targetData = data[i];\n        msg.payload = targetData.sbi;\n        msg.topic = \"Bikes\";\n        break;\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 280,
+        "wires": [
+            [
+                "71b576ccabc5e5c7",
+                "e990bbd7838dcf15"
+            ]
+        ]
+    },
+    {
+        "id": "1b901d3649519a08",
+        "type": "inject",
+        "z": "f250910c1511069a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "3680ad0006283382"
+            ]
+        ]
+    },
+    {
+        "id": "e990bbd7838dcf15",
+        "type": "ui_chart",
+        "z": "f250910c1511069a",
+        "name": "",
+        "group": "8dfaea4c2bd67054",
+        "order": 7,
+        "width": 6,
+        "height": 5,
+        "label": "Youbike Jinan Rd",
+        "chartType": "pie",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "loading....",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#7edb6b",
+            "#ff4242",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 950,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "81eb917727dfb9f6",
+        "type": "function",
+        "z": "f250910c1511069a",
+        "name": "function 2",
+        "func": "// 在 Function 節點中的 JavaScript 代碼\n\n// 取得前一節點的輸出資料\nvar data = msg.payload;\n\n// 要找的 sno\nvar targetSno = \"500106044\";\n\n// 在資料中找到對應的 sno\nvar targetData = null;\nfor (var i = 0; i < data.length; i++) {\n    if (data[i].sno === targetSno) {\n        targetData = data[i];\n        msg.payload = targetData.bemp;\n        msg.topic = \"Docks\";\n        break;\n    }\n}\n\nreturn msg ; ",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 360,
+        "wires": [
+            [
+                "e990bbd7838dcf15",
+                "d2c4f355de68362c"
+            ]
+        ]
+    },
+    {
+        "id": "71b576ccabc5e5c7",
+        "type": "debug",
+        "z": "f250910c1511069a",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "d2c4f355de68362c",
+        "type": "debug",
+        "z": "f250910c1511069a",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "38b73c00bb8cde4b",
+        "type": "mqtt in",
+        "z": "f250910c1511069a",
+        "name": "",
+        "topic": "jim/ntub/total_people",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b1b4374953f55c17",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 480,
+        "wires": [
+            [
+                "9b1ad90e687289f1"
+            ]
+        ]
+    },
+    {
+        "id": "9b1ad90e687289f1",
+        "type": "ui_gauge",
+        "z": "f250910c1511069a",
+        "name": "",
+        "group": "8dfaea4c2bd67054",
+        "order": 4,
+        "width": 7,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Total people",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "5",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 970,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "65a5b35b59385213",
+        "type": "ui_chart",
+        "z": "f250910c1511069a",
+        "name": "",
+        "group": "8dfaea4c2bd67054",
+        "order": 5,
+        "width": 7,
+        "height": 5,
+        "label": "power consumption",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#fff157",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 940,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9dd0cd65db750ca9",
+        "type": "inject",
+        "z": "f250910c1511069a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "9d60425a84d880ed"
+            ]
+        ]
+    },
+    {
+        "id": "9d60425a84d880ed",
+        "type": "function",
+        "z": "f250910c1511069a",
+        "name": "function 3",
+        "func": "msg.payload=Math.random()*1000\nmsg.topic = \"Power consumption\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 540,
+        "wires": [
+            [
+                "65a5b35b59385213"
+            ]
+        ]
+    },
+    {
+        "id": "54b59ebeaf12b791",
+        "type": "mqtt in",
+        "z": "f250910c1511069a",
+        "name": "",
+        "topic": "jim/ntub/hum",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b1b4374953f55c17",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "311a318065d4acbc"
+            ]
+        ]
+    },
+    {
+        "id": "ae576c9e229d5684",
+        "type": "ui_template",
+        "z": "f250910c1511069a",
+        "group": "8dfaea4c2bd67054",
+        "name": "ip camera",
+        "order": 12,
+        "width": 7,
+        "height": 5,
+        "format": "<div>\n    <img id=\"cameraImage\" src=\"http://10.153.74.51:8081/video\" width=\"100%\" height=\"100%\" />\n</div>\n\n\n\n<script>\n    (function() {\n        var cameraImage = document.getElementById('cameraImage');\n\n        setInterval(function() {\n            cameraImage.src = \"http://10.153.74.51:8081/video\" + Math.random();\n        }, 88888888888888); \n    })();\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 300,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f368f0736bf10bd6",
+        "type": "mqtt in",
+        "z": "f250910c1511069a",
+        "name": "",
+        "topic": "jim/ntub/emergency_exit",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b1b4374953f55c17",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "ddf070fd69cca27e"
+            ]
+        ]
+    },
+    {
+        "id": "ddf070fd69cca27e",
+        "type": "switch",
+        "z": "f250910c1511069a",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 390,
+        "y": 220,
+        "wires": [
+            [
+                "938bc5e97423235b"
+            ],
+            [
+                "71547f53c4ff6470"
+            ]
+        ]
+    },
+    {
+        "id": "8f70e0e3a3cea95d",
+        "type": "ui_text",
+        "z": "f250910c1511069a",
+        "group": "8dfaea4c2bd67054",
+        "order": 10,
+        "width": 7,
+        "height": 2,
+        "name": "",
+        "label": "Emergency exit",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "Arial Black,Arial Black,Gadget,sans-serif",
+        "fontSize": "30",
+        "color": "#d69d4c",
+        "x": 960,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "938bc5e97423235b",
+        "type": "change",
+        "z": "f250910c1511069a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Close",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 200,
+        "wires": [
+            [
+                "8f70e0e3a3cea95d"
+            ]
+        ]
+    },
+    {
+        "id": "71547f53c4ff6470",
+        "type": "change",
+        "z": "f250910c1511069a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Open",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 240,
+        "wires": [
+            [
+                "8f70e0e3a3cea95d"
+            ]
+        ]
+    },
+    {
+        "id": "f43ea3680bc01383",
+        "type": "ui_switch",
+        "z": "f250910c1511069a",
+        "name": "",
+        "label": "Light control",
+        "tooltip": "",
+        "group": "8dfaea4c2bd67054",
+        "order": 13,
+        "width": 4,
+        "height": 3,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "turn_off",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "turn_on",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 110,
+        "y": 580,
+        "wires": [
+            [
+                "2d17ae374e922b29"
+            ]
+        ]
+    },
+    {
+        "id": "2d17ae374e922b29",
+        "type": "mqtt out",
+        "z": "f250910c1511069a",
+        "name": "",
+        "topic": "jim/ntub/light_control",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b1b4374953f55c17",
+        "x": 940,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "d3b468bf58455a8c",
+        "type": "ui_chart",
+        "z": "f250910c1511069a",
+        "name": "",
+        "group": "8dfaea4c2bd67054",
+        "order": 1,
+        "width": 13,
+        "height": 5,
+        "label": "Solar power",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 970,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7b2fcf57305174f4",
+        "type": "inject",
+        "z": "f250910c1511069a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 640,
+        "wires": [
+            [
+                "4d6fa3a336dd4ce4"
+            ]
+        ]
+    },
+    {
+        "id": "4d6fa3a336dd4ce4",
+        "type": "function",
+        "z": "f250910c1511069a",
+        "name": "function 5",
+        "func": "const months = [\n  \"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\",\n  \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\"\n];\n\nconst num = [23, 24, 43, 56, 67, 98, 87, 97, 76, 46, 32, 17];\n\nconst greenenergyData = months.map((month, index) => ({\n  greenenergyData: num[index],\n  month\n}));\n\nmsg.payload = greenenergyData;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 640,
+        "wires": [
+            [
+                "a36ae4f620f3b476"
+            ]
+        ]
+    },
+    {
+        "id": "a36ae4f620f3b476",
+        "type": "split",
+        "z": "f250910c1511069a",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 490,
+        "y": 640,
+        "wires": [
+            [
+                "5b2c43fd9eb367fc"
+            ]
+        ]
+    },
+    {
+        "id": "5b2c43fd9eb367fc",
+        "type": "change",
+        "z": "f250910c1511069a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "payload.month",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.greenenergyData",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 640,
+        "wires": [
+            [
+                "d3b468bf58455a8c"
+            ]
+        ]
+    },
+    {
+        "id": "054266321823248f",
+        "type": "ui_template",
+        "z": "f250910c1511069a",
+        "group": "8dfaea4c2bd67054",
+        "name": "ip camera",
+        "order": 11,
+        "width": 7,
+        "height": 5,
+        "format": "<div>\n    <img id=\"cameraImage\" src=\"http://10.153.74.51:8081/video\" width=\"100%\" height=\"100%\" />\n</div>\n\n\n\n<script>\n    (function() {\n        var cameraImage = document.getElementById('cameraImage');\n\n        setInterval(function() {\n            cameraImage.src = \"http://10.153.74.51:8081/video\" + Math.random();\n        }, 88888888888888); \n    })();\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 120,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "12621401cbadeaac",
+        "type": "ui_chart",
+        "z": "f250910c1511069a",
+        "name": "",
+        "group": "8dfaea4c2bd67054",
+        "order": 6,
+        "width": 9,
+        "height": 5,
+        "label": "parking space information",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "500",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#99df8b",
+            "#99df8b",
+            "#ff7f0e",
+            "#ff7f10",
+            "#cd8bdf",
+            "#cd8bdf",
+            "#ff9896",
+            "#9467bd",
+            "#99df8b"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 930,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cd84f79390de880b",
+        "type": "inject",
+        "z": "f250910c1511069a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 680,
+        "wires": [
+            [
+                "006809e906ca2985"
+            ]
+        ]
+    },
+    {
+        "id": "006809e906ca2985",
+        "type": "function",
+        "z": "f250910c1511069a",
+        "name": "function 6",
+        "func": "const months = [\n  \"B1 A\", \"B1 B\", \"B2 A\", \"B2 B\", \"B3 A\", \"B3 B\"\n];\n\nconst num = [500, 500, 459, 384, 242, 354];\n\nconst greenenergyData = months.map((month, index) => ({\n  greenenergyData: num[index],\n  month\n}));\n\nmsg.payload = greenenergyData;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 680,
+        "wires": [
+            [
+                "23678f94368143ab"
+            ]
+        ]
+    },
+    {
+        "id": "23678f94368143ab",
+        "type": "split",
+        "z": "f250910c1511069a",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 490,
+        "y": 680,
+        "wires": [
+            [
+                "ae04c371b556aa2a"
+            ]
+        ]
+    },
+    {
+        "id": "ae04c371b556aa2a",
+        "type": "change",
+        "z": "f250910c1511069a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "payload.month",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.greenenergyData",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 680,
+        "wires": [
+            [
+                "12621401cbadeaac"
+            ]
+        ]
+    },
+    {
+        "id": "cde8b6d093de8c9a",
+        "type": "http request",
+        "z": "f250910c1511069a",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 420,
+        "wires": [
+            [
+                "858dd4d9a441e155",
+                "e54d35db43654ca4"
+            ]
+        ]
+    },
+    {
+        "id": "858dd4d9a441e155",
+        "type": "function",
+        "z": "f250910c1511069a",
+        "name": "function 7",
+        "func": "// 取得前一節點的輸出資料\nvar data = msg.payload;\n\n// 要找的 sno\nvar targetSno = \"500106110\";\n\n// 在資料中找到對應的 sno\nvar targetData = null;\nfor (var i = 0; i < data.length; i++) {\n    if (data[i].sno === targetSno) {\n        targetData = data[i];\n        msg.payload = targetData.sbi;\n        msg.topic = \"Bikes\";\n        break;\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 400,
+        "wires": [
+            [
+                "dc58fae7d481a375"
+            ]
+        ]
+    },
+    {
+        "id": "21a9d9d4d9fe3b32",
+        "type": "inject",
+        "z": "f250910c1511069a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "cde8b6d093de8c9a"
+            ]
+        ]
+    },
+    {
+        "id": "dc58fae7d481a375",
+        "type": "ui_chart",
+        "z": "f250910c1511069a",
+        "name": "",
+        "group": "8dfaea4c2bd67054",
+        "order": 8,
+        "width": 6,
+        "height": 5,
+        "label": "Youbike MRT Sta",
+        "chartType": "pie",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "loading....",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#7edb6b",
+            "#ff4242",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 950,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e54d35db43654ca4",
+        "type": "function",
+        "z": "f250910c1511069a",
+        "name": "function 8",
+        "func": "// 在 Function 節點中的 JavaScript 代碼\n\n// 取得前一節點的輸出資料\nvar data = msg.payload;\n\n// 要找的 sno\nvar targetSno = \"500106110\";\n\n// 在資料中找到對應的 sno\nvar targetData = null;\nfor (var i = 0; i < data.length; i++) {\n    if (data[i].sno === targetSno) {\n        targetData = data[i];\n        msg.payload = targetData.bemp;\n        msg.topic = \"Docks\";\n        break;\n    }\n}\n\nreturn msg ; ",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 440,
+        "wires": [
+            [
+                "dc58fae7d481a375"
+            ]
+        ]
+    },
+    {
+        "id": "8524de11d1652495",
+        "type": "ui_gauge",
+        "z": "f250910c1511069a",
+        "name": "",
+        "group": "8dfaea4c2bd67054",
+        "order": 3,
+        "width": 4,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 970,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "311a318065d4acbc",
+        "type": "ui_gauge",
+        "z": "f250910c1511069a",
+        "name": "",
+        "group": "8dfaea4c2bd67054",
+        "order": 2,
+        "width": 4,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "100",
+        "colors": [
+            "#61f4ff",
+            "#61f4ff",
+            "#61f4ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 980,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "2a498ca6162f5b84",
+        "type": "mqtt in",
+        "z": "f250910c1511069a",
+        "name": "",
+        "topic": "jim/ntub/emergency_state",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b1b4374953f55c17",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 720,
+        "wires": [
+            [
+                "cf92cb338a034c6e"
+            ]
+        ]
+    },
+    {
+        "id": "26a7f15b4765dcc3",
+        "type": "ui_audio",
+        "z": "f250910c1511069a",
+        "name": "",
+        "group": "8dfaea4c2bd67054",
+        "voice": "Meijia",
+        "always": true,
+        "x": 980,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "cf92cb338a034c6e",
+        "type": "switch",
+        "z": "f250910c1511069a",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 430,
+        "y": 720,
+        "wires": [
+            [
+                "a893a6cb3bf7c32f"
+            ]
+        ]
+    },
+    {
+        "id": "a893a6cb3bf7c32f",
+        "type": "change",
+        "z": "f250910c1511069a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "就命啊救命啊有緊急狀況",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "緊急",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 720,
+        "wires": [
+            [
+                "26a7f15b4765dcc3",
+                "a850d7aa878adffe"
+            ]
+        ]
+    },
+    {
+        "id": "13ab4c0bdac00e68",
+        "type": "mqtt in",
+        "z": "f250910c1511069a",
+        "name": "",
+        "topic": "jim/ntub/announce",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b1b4374953f55c17",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 820,
+        "wires": [
+            [
+                "089ee93b937350d3",
+                "c7381a075d5d67bd"
+            ]
+        ]
+    },
+    {
+        "id": "089ee93b937350d3",
+        "type": "ui_text",
+        "z": "f250910c1511069a",
+        "group": "8dfaea4c2bd67054",
+        "order": 15,
+        "width": 7,
+        "height": 3,
+        "name": "",
+        "label": "Announce",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 980,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "c7381a075d5d67bd",
+        "type": "debug",
+        "z": "f250910c1511069a",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "a850d7aa878adffe",
+        "type": "ui_toast",
+        "z": "f250910c1511069a",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "red",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 950,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "c61ea029feb96151",
+        "type": "ui_spacer",
+        "z": "f250910c1511069a",
+        "name": "spacer",
+        "group": "8dfaea4c2bd67054",
+        "order": 9,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "3b994b62ef31ea7e",
+        "type": "ui_spacer",
+        "z": "f250910c1511069a",
+        "name": "spacer",
+        "group": "8dfaea4c2bd67054",
+        "order": 16,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "b1b4374953f55c17",
+        "type": "mqtt-broker",
+        "name": "jim's mqtt server",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "8dfaea4c2bd67054",
+        "type": "ui_group",
+        "name": "智慧大樓",
+        "tab": "562d24740f51b684",
+        "order": 1,
+        "disp": true,
+        "width": 28,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "562d24740f51b684",
+        "type": "ui_tab",
+        "name": "老師不要當我們2.0",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
